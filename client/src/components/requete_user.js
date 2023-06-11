@@ -5,6 +5,7 @@ export default {
     return {
       username: "",
       password: "",
+      user_error: false,
     };
   },
 
@@ -23,10 +24,10 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.data.status) {
+          if (!data.data.status) {
             this.$router.push("/home");
           } else {
-            this.$router.push("/error");
+            this.user_error = true;
           }
         });
     },

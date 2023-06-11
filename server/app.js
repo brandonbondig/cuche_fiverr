@@ -12,7 +12,7 @@ const app = express();
 dotenv.config();
 
 // Define port number
-const port = 5001; 
+const port = 5001;
 
 // Use necessary middleware
 app.use(cors());
@@ -34,7 +34,6 @@ app.get("/verify", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-
 // Login route
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -52,11 +51,12 @@ app.post("/login", (req, res) => {
 });
 
 // User existence check route
-app.get("/user_exist/:username", (req, res) => {
+app.post("/user_exists", (req, res) => {
   const { username } = req.params;
+  const { email } = req.params;
   console.log("app user_exists?");
 
-  const result = database.getInstance().user_exists(username);
+  const result = database.getInstance().user_exists(username, email);
   result
     .then((data) => res.json({ data: data }))
     .catch((err) => console.log(err));

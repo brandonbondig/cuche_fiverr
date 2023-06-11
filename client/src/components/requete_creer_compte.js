@@ -5,13 +5,13 @@ export default {
       email: "",
       password: "",
       c_password: "",
+      user_exists: false,
     };
   },
   methods: {
     submitForm() {
       console.log(this.password, this.c_password);
       if (this.c_password == this.password) {
-        console.log(this.username + this.password + this.email);
         fetch("http://localhost:5001/create_user", {
           headers: {
             "Content-type": "application/json",
@@ -22,9 +22,18 @@ export default {
             password: this.password,
             email: this.email,
           }),
-        }).then((response) => response.json());
-      } else {
-        console.log("les 2 mdp sont pas les mêmes");
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.data.error == 409) {
+              this.user_exists = true;
+              console.log(data);
+            }
+            if (data.data.error != 409) {
+              console.log(data);
+              this.$router.push("/user_p");
+            }
+          });
       }
     },
   },
