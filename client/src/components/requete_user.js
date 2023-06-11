@@ -12,7 +12,7 @@ export default {
   methods: {
     submitForm() {
       console.log(this.username + this.password);
-      fetch("http://localhost:5001/login", {
+      fetch("https://15e1-95-154-22-11.eu.ngrok.io/login", {
         headers: {
           "Content-type": "application/json",
         },

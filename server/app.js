@@ -17,7 +17,7 @@ const port = 5001;
 // Use necessary middleware
 app.use(
   cors({
-    origin: "http://localhost:8080", // replace with the domain of your frontend app
+    origin: "https://a02b-95-154-22-11.eu.ngrok.io", // replace with the domain of your frontend app
     credentials: true,
   })
 );
