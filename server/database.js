@@ -1,16 +1,13 @@
 // Import required modules
 const mysql = require("mysql");
-const dotenv = require("dotenv");
 const uuid = require("uuid");
 
 // Initialize the instance to be null
 let instance = null;
 
-// Read .env configuration file
-dotenv.config();
-
 // Create a connection to the MySQL server
 const connection = mysql.createConnection({
+  // DOTENV
   host: "cuche.cfeiiubvqyfi.eu-central-1.rds.amazonaws.com",
   user: "admin",
   password: "password",
@@ -44,7 +41,6 @@ class database {
 
     const id = uuid.v4();
 
-    // WARNING: This code is susceptible to SQL injection. Use parameterized queries instead.
     try {
       const response = await new Promise((resolve, reject) => {
         const query = `INSERT INTO users (username, password, email, UUID) VALUES ('${username}', '${password}', '${email}', '${id}');`;
@@ -61,7 +57,6 @@ class database {
 
   // Method to check if user exists
   async user_exists(username, email) {
-    // WARNING: This code is susceptible to SQL injection. Use parameterized queries instead.
     try {
       const response = await new Promise((resolve, reject) => {
         const query = `SELECT * FROM users WHERE username = '${username}' OR email='${email}'; `;
@@ -78,8 +73,6 @@ class database {
 
   // Method to login user
   async login(username, password) {
-    // WARNING: This code is susceptible to SQL injection. Use parameterized queries instead.
-    // Also, passwords should not be stored in plaintext. Use hashed + salted passwords in production code.
     try {
       const response = await new Promise((resolve, reject) => {
         const query = `SELECT * FROM users WHERE username = '${username}' AND password='${password}';`;
@@ -97,7 +90,6 @@ class database {
 
   // Method to verify user token
   async verify_token(token) {
-    // WARNING: This code is susceptible to SQL injection. Use parameterized queries instead.
     try {
       const response = await new Promise((resolve, reject) => {
         const query = `SELECT * FROM users WHERE UUID = '${token}';`;
@@ -106,6 +98,7 @@ class database {
           resolve(result);
         });
       });
+      console.log(response);
       return response.length != 0;
     } catch (error) {
       return { error: 500, message: error.message };

@@ -7,7 +7,7 @@
     <label for="username">nom d'utilisateur :</label>
     <input type="text" id="username" name="username" v-model="username" required>
     <label for="mail">adresse mail :</label>
-    <input type="text" id="mail" name="mail" v-model="mail" required>
+    <input type="text" id="mail" name="mail" v-model="email" required>
     <label for="password">mot de passe </label>
     <input type="password" id="password" name="password" v-model="password" required>
 
