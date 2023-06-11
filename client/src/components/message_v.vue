@@ -6,7 +6,7 @@
       class="conversation"
       onclick="window.location.href='conversation1.html';"
     >
-      <img src="image1.jpg" alt="Image conversation" />
+      <img src="../photos/annonces/image1.jpg" alt="Image conversation" />
       <div class="info">
         <h2>Titre de la conversation 1</h2>
         <p>Dernier message de la conversation 1</p>
@@ -17,7 +17,7 @@
       class="conversation"
       onclick="window.location.href='conversation2.html';"
     >
-      <img src="image2.jpg" alt="Image conversation" />
+      <img src="../photos/annonces/image1.jpg" alt="Image conversation" />
       <div class="info">
         <h2>Titre de la conversation 2</h2>
         <p>Dernier message de la conversation 2</p>

@@ -24,7 +24,7 @@
 
       <label for="confirm-password">Confirmer mot de passe</label>
       <input
-        type="confirm-password"
+        type="password"
         id="confirm-password"
         name="confirm-password"
         v-model="c_password"

@@ -15,7 +15,13 @@ dotenv.config();
 const port = 5001;
 
 // Use necessary middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:8080", // replace with the domain of your frontend app
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -25,9 +31,10 @@ app.get("/", (req, res) => {
   res.json({ info: "Node.js, Express, and Postgres API" });
 });
 
-app.get("/verify", (req, res) => {
+app.post("/verify", (req, res) => {
   const { token } = req.cookies;
-  console.log("app verify");
+
+
   const result = database.getInstance().verify_token(req.cookies.token);
   result
     .then((data) => res.json({ data: data }))
@@ -37,7 +44,6 @@ app.get("/verify", (req, res) => {
 // Login route
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
-  console.log("app login");
 
   const result = database.getInstance().login(username, password);
   result
@@ -54,7 +60,6 @@ app.post("/login", (req, res) => {
 app.post("/user_exists", (req, res) => {
   const { username } = req.params;
   const { email } = req.params;
-  console.log("app user_exists?");
 
   const result = database.getInstance().user_exists(username, email);
   result

@@ -17,6 +17,7 @@ export default {
           "Content-type": "application/json",
         },
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
           username: this.username,
           password: this.password,
@@ -24,8 +25,15 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (!data.data.status) {
-            this.$router.push("/home");
+          console.log(data);
+          if (data.data.status) {
+            // set local storage
+            localStorage.setItem(
+              "username",
+              JSON.stringify(data.data.username)
+            );
+            localStorage.setItem("email", JSON.stringify(data.data.email));
+            this.$router.push("/connecte");
           } else {
             this.user_error = true;
           }

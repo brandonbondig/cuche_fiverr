@@ -82,7 +82,12 @@ class database {
         });
       });
 
-      return { status: response.length != 0, uuid: response[0]?.UUID };
+      return {
+        status: response.length != 0,
+        uuid: response[0]?.UUID,
+        username: response[0]?.username,
+        email: response[0]?.email,
+      };
     } catch (error) {
       return { error: 500, message: error.message };
     }
@@ -98,7 +103,6 @@ class database {
           resolve(result);
         });
       });
-      console.log(response);
       return response.length != 0;
     } catch (error) {
       return { error: 500, message: error.message };
