@@ -17,14 +17,14 @@ const port = 5001;
 // Use necessary middleware
 app.use(
   cors({
-    origin: "https://a02b-95-154-22-11.eu.ngrok.io", // replace with the domain of your frontend app
+    origin: "http://localhost:8080", // replace with the domain of your frontend app
     credentials: true,
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser()); // Parse cookies
 
 // Home route
 app.get("/", (req, res) => {
@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 
 app.post("/verify", (req, res) => {
   const { token } = req.cookies;
-
 
   const result = database.getInstance().verify_token(req.cookies.token);
   result

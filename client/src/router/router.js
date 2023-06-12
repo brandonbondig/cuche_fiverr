@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
     axios({
       method: "POST",
       withCredentials: true,
-      url: "https://15e1-95-154-22-11.eu.ngrok.io/verify",
+      url: "http://localhost:5001/verify",
     })
       .then((response) => {
         if (response.data.data) {
@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
     axios({
       method: "POST",
       withCredentials: true,
-      url: "https://15e1-95-154-22-11.eu.ngrok.io/verify",
+      url: "http://localhost:5001/verify",
     })
       .then((response) => {
         if (response.data.data) {

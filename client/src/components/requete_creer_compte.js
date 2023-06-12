@@ -12,7 +12,7 @@ export default {
     submitForm() {
       console.log(this.password, this.c_password);
       if (this.c_password == this.password) {
-        fetch("https://15e1-95-154-22-11.eu.ngrok.io/create_user", {
+        fetch("http://localhost:5001/create_user", {
           headers: {
             "Content-type": "application/json",
           },

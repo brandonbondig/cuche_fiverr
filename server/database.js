@@ -8,7 +8,7 @@ let instance = null;
 // Create a connection to the MySQL server
 const connection = mysql.createConnection({
   // DOTENV
-  host: "localhost",
+  host: "cuche.cfeiiubvqyfi.eu-central-1.rds.amazonaws.com",
   user: "admin",
   password: "password",
   port: 3306,
