@@ -42,6 +42,7 @@ const routes = [
     name: "creer_compte",
     component: creer_compte,
   },
+  
 ];
 
 const router = createRouter({
