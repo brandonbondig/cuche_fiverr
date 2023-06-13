@@ -23,7 +23,12 @@ connection.connect((err) => {
   console.log("[DATABASE CONNECTION]: " + connection.state);
 });
 
-// Definition of the 'database' class
+/**
+ * Class to handle all database operations
+ * @class database
+ * @classdesc This class is a singleton class
+ * @exports database
+ */
 class database {
   // Singleton pattern to ensure only one instance of database
   static getInstance() {
@@ -109,8 +114,7 @@ class database {
     }
   }
 
-  // Method to get listings UUID, address, price, square_meters, description, image_url
-
+  // Method to get all listings
   async get_all_listings() {
     try {
       const response = await new Promise((resolve, reject) => {
@@ -126,6 +130,7 @@ class database {
     }
   }
 
+  // Method to get listing by UUID
   async get_listing(UUID) {
     try {
       const response = await new Promise((resolve, reject) => {
@@ -141,7 +146,7 @@ class database {
     }
   }
 
-  //get listing by created_by
+  // Method to get listings by user
   async get_listings_by_user(UUID) {
     try {
       const response = await new Promise((resolve, reject) => {
@@ -157,6 +162,7 @@ class database {
     }
   }
 
+  // Method to create a new listing
   async create_listing(
     UUID,
     created_by,
@@ -179,6 +185,22 @@ class database {
       return { error: 500, message: error.message };
     }
     return { error: null, message: "Listing created", uuid: UUID };
+  }
+
+  // Method to delete a listing
+  async delete_listing(UUID) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `DELETE FROM listings WHERE UUID = '${UUID}';`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+    return { error: null, message: "Listing deleted", uuid: UUID };
   }
 }
 

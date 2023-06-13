@@ -121,5 +121,13 @@ app.post("/create_listing", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post("/delete_listing", (req, res) => {
+  const { id } = req.body;
+  const result = database.getInstance().delete_listing(id);
+  result
+    .then((data) => res.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
 // Start server
 app.listen(port, () => console.log("app is running on port:", port));
