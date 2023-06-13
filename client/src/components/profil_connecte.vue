@@ -3,7 +3,9 @@
   <h2>Welcome Back {{ username + "!" }}</h2>
   <div class="recommandé">
     <p>mes anonces publiées</p>
-    <button><a href="/creer_annonce">Créer annonce</a></button>
+    <button class="creer-button">
+      <a href="/creer_annonce">Créer annonce</a>
+    </button>
     <div class="button-container">
       <ul class="button-list">
         <li>
@@ -42,8 +44,19 @@ export default {
     this.email = JSON.parse(email);
 
     // get listings
-
-    
   },
 };
 </script>
+
+<style>
+.creer-button {
+  background-color: #008cba; /* Green */
+  border: none;
+  color: "#ffffff";
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>

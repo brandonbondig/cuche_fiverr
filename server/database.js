@@ -141,6 +141,22 @@ class database {
     }
   }
 
+  //get listing by created_by
+  async get_listings_by_user(UUID) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM listings WHERE created_by = '${UUID}';`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+  }
+
   async create_listing(
     UUID,
     created_by,

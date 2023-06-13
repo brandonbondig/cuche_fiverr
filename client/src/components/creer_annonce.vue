@@ -29,7 +29,7 @@
 
       <label>
         Image URL
-        <input v-bind="image_url" type="file" required />
+        <input v-model="image_url" type="text" required />
       </label>
 
       <button type="submit">Submit</button>

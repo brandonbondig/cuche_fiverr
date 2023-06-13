@@ -89,8 +89,18 @@ app.get("/get_listing/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/get_user_listings", (req, res) => {
+  const { token } = req.cookies;
+  const result = database.getInstance().get_user_listings(token);
+  result
+
+    .then((data) => res.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
 app.post("/create_listing", (req, res) => {
-  const {title, address, price, square_meters, description, image_url } = req.body;
+  const { title, address, price, square_meters, description, image_url } =
+    req.body;
   //get token from cookie
   const created_by = req.cookies.token;
 
