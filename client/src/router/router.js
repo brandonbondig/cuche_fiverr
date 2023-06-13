@@ -54,7 +54,6 @@ const routes = [
     path: "/annonce/:UUID",
     name: "view_annonces",
     component: view_annonces,
-    meta: { requiresAuth: true },
   },
 ];
 

@@ -1,27 +1,8 @@
-// Import required modules
-const mysql = require("mysql");
 const uuid = require("uuid");
+const connection = require("../database.js");
 
 // Initialize the instance to be null
 let instance = null;
-
-// Create a connection to the MySQL server
-const connection = mysql.createConnection({
-  // DOTENV
-  host: "localhost",
-  user: "admin",
-  password: "password",
-  port: 3306,
-  database: "cuche",
-});
-
-// Attempt to connect to the MySQL server
-connection.connect((err) => {
-  if (err) {
-    console.log(err.message);
-  }
-  console.log("[DATABASE CONNECTION]: " + connection.state);
-});
 
 /**
  * Class to handle all database operations

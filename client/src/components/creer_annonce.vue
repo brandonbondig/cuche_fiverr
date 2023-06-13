@@ -28,8 +28,8 @@
       </label>
 
       <label>
-        Image URL
-        <input v-model="image_url" type="text" required />
+        Image
+        <input type="file" @change="onFileChange($event)" required />
       </label>
 
       <button type="submit">Submit</button>
@@ -48,18 +48,31 @@ export default {
       price: "",
       square_meters: "",
       description: "",
-      image_url: "",
+      image_blob: "",
     };
   },
   methods: {
-    submitForm() {
+    onFileChange(e) {
+      const file = e.target.files[0];
+      this.fileToByte64(file);
+    },
+    async fileToByte64(file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.image_blob = reader.result;
+      };
+    },
+
+    async submitForm() {
+      const test = this.image_blob.toString();
       const data = {
         title: this.title,
         address: this.address,
         price: this.price,
         square_meters: this.square_meters,
         description: this.description,
-        image_url: this.image_url,
+        image_url: test,
       };
 
       axios({

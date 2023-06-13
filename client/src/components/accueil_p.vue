@@ -10,11 +10,7 @@
         >
           <li>
             <div class="info-content" @click="gotoAnnonce(annonce.UUID)">
-              <img
-                class="info-image"
-                :src="annonce.image_url"
-                alt="Ma photo"
-              />
+              <img class="info-image" :src="annonce.image_url" alt="Ma photo" />
               <div class="info-details">
                 <h2 class="info-title">{{ annonce.title }}</h2>
                 <div class="info-address">{{ annonce.address }}</div>

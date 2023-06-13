@@ -1,6 +1,6 @@
 <template>
   <div class="annonce-container">
-    <img :src="annonces.image_url" alt="Property Image" class="info-image" />
+    <img :src="imageData" alt="Property Image" class="info-image" />
     <div class="info-details">
       <h1 class="info-title">{{ annonces.title }}</h1>
       <h3 class="info-address">{{ annonces.address }}</h3>
@@ -10,7 +10,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -18,6 +17,7 @@ export default {
   data() {
     return {
       annonces: {},
+      imageData: null,
     };
   },
 
@@ -27,6 +27,7 @@ export default {
       .get("http://localhost:5001/get_listing/" + this.$route.params.UUID)
       .then((response) => {
         this.annonces = response.data.data[0];
+        this.imageData = this.annonces.image_url;
         console.log(this.annonces);
       })
       .catch((error) => {
