@@ -7,6 +7,8 @@ import message from "../components/message_v.vue";
 import favoris from "../components/favoris_v.vue";
 import creer_compte from "../components/creer_compte";
 import p_connecte from "../components/profil_connecte.vue";
+import creer_annonce from "../components/creer_annonce.vue";
+import view_annonces from "../components/view_annonces.vue";
 
 const routes = [
   {
@@ -42,7 +44,18 @@ const routes = [
     name: "creer_compte",
     component: creer_compte,
   },
-  
+  {
+    path: "/creer_annonce",
+    name: "creer_annonce",
+    component: creer_annonce,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/annonce/:UUID",
+    name: "view_annonces",
+    component: view_annonces,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

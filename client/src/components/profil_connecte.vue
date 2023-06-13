@@ -3,6 +3,7 @@
   <h2>Welcome Back {{ username + "!" }}</h2>
   <div class="recommandé">
     <p>mes anonces publiées</p>
+    <button><a href="/creer_annonce">Créer annonce</a></button>
     <div class="button-container">
       <ul class="button-list">
         <li>
@@ -39,6 +40,10 @@ export default {
 
     const email = localStorage.getItem("email");
     this.email = JSON.parse(email);
+
+    // get listings
+
+    
   },
 };
 </script>

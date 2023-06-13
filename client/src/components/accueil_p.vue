@@ -3,57 +3,60 @@
     <div class="recommandé">
       <p>Recommandé pour vous:</p>
       <div class="button-container">
-        <ul class="button-list">
+        <ul
+          class="button-list"
+          v-for="(annonce, index) in annonces"
+          :key="index"
+        >
           <li>
-            <button div class="info-content">
+            <div class="info-content" @click="gotoAnnonce(annonce.UUID)">
               <img
                 class="info-image"
-                src="../photos/annonces/image1.jpg"
+                :src="annonce.image_url"
                 alt="Ma photo"
               />
               <div class="info-details">
-                <h2 class="info-title">Mon titre</h2>
-                <div class="info-address">Mon adresse</div>
-                <div class="info-price">Mon prix</div>
+                <h2 class="info-title">{{ annonce.title }}</h2>
+                <div class="info-address">{{ annonce.address }}</div>
+                <div class="info-price">€{{ annonce.price }}</div>
               </div>
-            </button>
+            </div>
           </li>
-          <li>
-            <button div class="info-content">
-              <img class="info-image" src="mon-image.jpg" alt="Ma photo" />
-              <div class="info-details">
-                <h2 class="info-title">Mon titre</h2>
-                <div class="info-address">Mon adresse</div>
-                <div class="info-price">Mon prix</div>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button div class="info-content">
-              <img class="info-image" src="mon-image.jpg" alt="Ma photo" />
-              <div class="info-details">
-                <h2 class="info-title">Mon titre</h2>
-                <div class="info-address">Mon adresse</div>
-                <div class="info-price">Mon prix</div>
-              </div>
-            </button>
-          </li>
-          <li>
-            <button div class="info-content">
-              <img class="info-image" src="mon-image.jpg" alt="Ma photo" />
-              <div class="info-details">
-                <h2 class="info-title">Mon titre</h2>
-                <div class="info-address">Mon adresse</div>
-                <div class="info-price">Mon prix</div>
-              </div>
-            </button>
-          </li>
+
           <!-- Répéter autant de fois que nécessaire en fonction du nombre d'entrées -->
         </ul>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      annonces: [],
+    };
+  },
+
+  methods: {
+    gotoAnnonce(UUID) {
+      this.$router.push(`/annonce/${UUID}`);
+    },
+  },
+  mounted() {
+    axios
+      .get("http://localhost:5001/get_all_listings")
+      .then((response) => {
+        this.annonces = response.data.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

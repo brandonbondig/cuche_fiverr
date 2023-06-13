@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
   user: "admin",
   password: "password",
   port: 3306,
-  database: "sys",
+  database: "cuche",
 });
 
 // Attempt to connect to the MySQL server
@@ -107,6 +107,62 @@ class database {
     } catch (error) {
       return { error: 500, message: error.message };
     }
+  }
+
+  // Method to get listings UUID, address, price, square_meters, description, image_url
+
+  async get_all_listings() {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM listings;`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+  }
+
+  async get_listing(UUID) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM listings WHERE UUID = '${UUID}';`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+  }
+
+  async create_listing(
+    UUID,
+    created_by,
+    title,
+    address,
+    price,
+    square_meters,
+    description,
+    image_url
+  ) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `INSERT INTO listings (UUID, created_by, title, address, price, square_meters, description, image_url) VALUES ('${UUID}', '${created_by}','${title}', '${address}', '${price}', '${square_meters}', '${description}', '${image_url}');`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+    return { error: null, message: "Listing created", uuid: UUID };
   }
 }
 
