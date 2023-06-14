@@ -8,6 +8,8 @@
       <div class="info-price">Price: {{ annonces.price }}</div>
       <div class="info-size">square meters: {{ annonces.square_meters }}</div>
     </div>
+
+    <button class="delete-button" @click="deleteListing()">Delete</button>
   </div>
 </template>
 <script>
@@ -19,6 +21,19 @@ export default {
       annonces: {},
       imageData: null,
     };
+  },
+  methods: {
+    deleteListing() {
+      axios
+        .get("http://localhost:5001/delete_listing/" + this.$route.params.UUID)
+        .then((response) => {
+          console.log(response);
+          this.$router.push("/connecte");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 
   mounted() {
@@ -36,3 +51,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.annonce-container {
+  color: black;
+
+  background-color: white;
+  width: 50%;
+  margin: 0 auto;
+}
+</style>

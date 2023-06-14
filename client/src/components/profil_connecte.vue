@@ -80,4 +80,8 @@ export default {
   display: inline-block;
   font-size: 16px;
 }
+
+.info-content{
+  cursor: pointer;
+}
 </style>

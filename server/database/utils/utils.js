@@ -183,6 +183,23 @@ class database {
     }
     return { error: null, message: "Listing deleted", uuid: UUID };
   }
+
+  // Method to search for listings
+
+  async search_listings(search_term) {
+    try {
+      const response = await new Promise((resolve, reject) => {
+        const query = `SELECT * FROM listings WHERE title LIKE '%${search_term}%' OR address LIKE '%${search_term}%' OR description LIKE '%${search_term}%';`;
+        connection.query(query, (err, result) => {
+          if (err) reject(new Error(err.message));
+          resolve(result);
+        });
+      });
+      return response;
+    } catch (error) {
+      return { error: 500, message: error.message };
+    }
+  }
 }
 
 // Export the 'database' class as a module

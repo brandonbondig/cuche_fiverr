@@ -18,6 +18,7 @@
             <img src="../photos/message.png" alt="bulle message" />
           </i>
         </router-link>
+        
         <button class="bulle-profil" v-on:click="go_to_profil"> <img src="../photos/profil_p.png" alt="bulle_profil" /> </button>
 
         <router-link to="/user_p" class="header-link">

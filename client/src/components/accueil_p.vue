@@ -2,6 +2,10 @@
   <div class="accueil">
     <div class="recommandé">
       <p>Recommandé pour vous:</p>
+      <div action="" class="form-content">
+        <input type="text" placeholder="Rechercher" v-model="search" />
+        <button @click="searchFunc(search)">Rechercher</button>
+      </div>
       <div class="button-container">
         <ul
           class="button-list"
@@ -33,6 +37,7 @@ export default {
   data() {
     return {
       annonces: [],
+      search: "",
     };
   },
 
@@ -40,8 +45,27 @@ export default {
     gotoAnnonce(UUID) {
       this.$router.push(`/annonce/${UUID}`);
     },
+    searchFunc(search) {
+      axios
+        .get("http://localhost:5001/search_listings/" + search)
+        .then((response) => {
+          this.annonces = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+          axios
+            .get("http://localhost:5001/get_all_listings")
+            .then((response) => {
+              this.annonces = response.data.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+    },
   },
-  mounted() {
+
+  created() {
     axios
       .get("http://localhost:5001/get_all_listings")
       .then((response) => {
@@ -56,6 +80,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.form-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -111,6 +142,7 @@ body {
   justify-content: flex-start;
   padding: 10px;
   width: 100%;
+  cursor: pointer;
 }
 
 .info-image {
@@ -142,7 +174,7 @@ body {
   font-size: 20px;
 }
 .info-content {
-  background-color: aqua;
+  background-color: white;
   position: relative;
   width: 400px;
   height: 200px;

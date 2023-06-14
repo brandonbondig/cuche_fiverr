@@ -106,9 +106,15 @@ router.post("/get_listings_by_user", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/delete_listing", (req, res) => {
-  const { id } = req.body;
-  const result = database.getInstance().delete_listing(id);
+router.get("/delete_listing/:uuid", (req, res) => {
+  const result = database.getInstance().delete_listing(req.params.uuid);
+  result
+    .then((data) => res.json({ data: data }))
+    .catch((err) => console.log(err));
+});
+
+router.get("/search_listings/:search", (req, res) => {
+  const result = database.getInstance().search_listings(req.params.search);
   result
     .then((data) => res.json({ data: data }))
     .catch((err) => console.log(err));
