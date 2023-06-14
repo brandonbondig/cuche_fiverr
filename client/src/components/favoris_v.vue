@@ -7,7 +7,7 @@
           <button div class="info-content">
             <img
               class="info-image"
-              src="../photos/annonces/image1.jpg"
+              src="../photos/image1.jpg"
               alt="Ma photo"
             />
             <div class="info-details">
