@@ -54,7 +54,7 @@ This application relies on a MySQL database named 'cuche'. This database contain
 
 ### .env File Setup
 
-This project uses dotenv for environment variable management. You need to create a `.env` file in the project root directory with the following structure:
+This project uses dotenv for environment variable management. Theres a `.env` file in the project root directory with the following structure:
 
 ```shell
 DB_HOST="localhost"
