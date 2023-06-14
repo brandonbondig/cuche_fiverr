@@ -15,14 +15,14 @@ You will need the following software installed on your local machine:
 
 This application relies on a MySQL database named 'cuche'. This database contains the following tables:
 
-#### users table
+#### 'users' table
 
 - username: TEXT, primary key, not null
 - password: TEXT, not null
 - email: TEXT, unique, not null
 - UUID: TEXT, unique, not null
 
-#### listings table
+#### 'listings' table
 
 - UUID: TEXT, primary key, not null
 - created_by: TEXT, not null
