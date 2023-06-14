@@ -15,14 +15,14 @@ You will need the following software installed on your local machine:
 
 ### Setup
 
-Import the cuche.sql file to your own MySQL server, the file can be found at `./server/cuche.sql`. This file can be importet using.
+Import the cuche.sql file to your own MySQL server, the file can be found at `./cuche.sql`. This file can be importet using.
 
 ```
-mysql -u your_username -p -h localhost cuche < ./server/cuche.sql
+mysql -u your_username -p -h localhost cuche < ./cuche.sql
 
 ```
 
-You will now have a databse available called `cuche` with the relevant tables and data, there will be a preset user:
+You will now have a databse available called `cuche` with the relevant tables and data, there will be a preset user, under the table `users`:
 
 username: `benoitcuche`
 
